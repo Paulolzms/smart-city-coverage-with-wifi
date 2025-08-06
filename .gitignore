@@ -1,0 +1,45 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Data and output
+*.csv
+*.txt
+*.json
+*.log
+*.dat
+*.pkl
+*.sqlite3
+*.db
+grafo_*.txt
+resultados/
+figuras/
+output/
+out/
+
+# Python-generated files
+*.egg
+*.egg-info/
+dist/
+build/
+*.tar.gz
+*.whl

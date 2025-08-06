@@ -7,10 +7,7 @@ def download_city_graph(city_name):
   return G
 
 def graph_to_adj_list(G):
-  adj_list = {}
-  for node in G.nodes():
-    adj_list[node] = list(G.neighbors(node))
-  return adj_list
+  return {u: list(G.neighbors(u)) for u in G.nodes}
 
 def save_adj_list_to_file(adj_list, filename):
   with open(filename, 'w') as f:

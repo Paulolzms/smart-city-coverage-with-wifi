@@ -1,25 +1,19 @@
+import os
 import osmnx as ox
-import networkx as nx
 import matplotlib.pyplot as plt
 
-def view_graph(G, node_color='red', edge_color='gray', node_size=10, edge_width=0.5):
+def view_graph(G, dominating_set, city_name):
+  node_colors = ['red' if node in dominating_set else 'blue' for node in G.nodes]
+  
   fig, ax = ox.plot_graph(
     G,
-    node_color=node_color,
-    edge_color=edge_color,
-    node_size=node_size,
-    edge_linewidth=edge_width,
+    node_color=node_colors,
+    edge_color='lightgray',
+    node_size=10,
+    edge_linewidth=0.5,
     bgcolor='white',
     show=True,
     close=True
   )
-
-if __name__ == '__main__':
-  city = "João Monlevade, Brazil"
-  G = ox.graph_from_place(city, network_type='walk')
-  G = nx.convert_node_labels_to_integers(G)
-
-  print(f"Número de nós: {len(G.nodes())}")
-  print(f"Número de arestas: {len(G.edges())}")
-
-  view_graph(G)
+  output_file = os.path.join("out", f"graph_{city_name.lower().replace(',', '').replace(' ', '_')}.png")
+  fig.savefig(output_file, dpi=300, bbox_inches='tight')
