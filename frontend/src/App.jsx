@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-
+import Map from './components/Map'
 
 export default function App() {
   const [city, setCity] = useState('João Monlevade, Brazil')
   const [distance, setDistance] = useState(50)
+
+  const dominantPoints = [
+    { lat: -19.800, lng: -43.170 },
+    { lat: -19.805, lng: -43.175 }
+  ]
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +29,7 @@ export default function App() {
       <main className='max-w-md mx-auto bg-white p-6 rounded-lg shadow-md'>
         <form  onSubmit={handleSubmit} className='space-y-4'>
           <div>
-            <label className='block font-semibold text-black mb-1'>City</label>
+            <label className='block font-semibold text-black mb-1'>Cidade</label>
             <input 
             type="text"
             value={city}
@@ -53,6 +58,9 @@ export default function App() {
             Gerar cobertura
           </button>
         </form>
+
+        {/* Map */}
+        <Map dominantCoordinates={dominantPoints} />
       </main>
     </div>
 
