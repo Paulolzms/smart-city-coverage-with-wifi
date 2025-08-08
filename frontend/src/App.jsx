@@ -1,21 +1,21 @@
 import { useState } from 'react'
 import './App.css'
 import Map from './components/Map'
+import { generateGraph } from './services/api'
 
 export default function App() {
   const [city, setCity] = useState('João Monlevade, Brazil')
   const [distance, setDistance] = useState(50)
+  const [dominantPoints, setDominantPoints] = useState([])
 
-  const dominantPoints = [
-    { lat: -19.800, lng: -43.170 },
-    { lat: -19.805, lng: -43.175 }
-  ]
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('City:', city)
-    console.log('Distance:', distance)
-    // Chamar a API do backend
+    console.log('Gerando grafo para:', city, distance, 'metros');
+    const data = await generateGraph(city, distance);
+    if (data && data.dominates) {
+      setDominantPoints(data.dominates);
+      console.log("Total de nós dominantes:", data.total_dominates);
+    }
   }
 
   return (
@@ -63,7 +63,6 @@ export default function App() {
         <Map dominantCoordinates={dominantPoints} />
       </main>
     </div>
-
   )
 }
 
